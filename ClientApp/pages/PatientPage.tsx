@@ -25,18 +25,25 @@ interface IState {
   limitPerPage: number;
   isSelectModalOpen: boolean;
   modelForEdit?: IPatientModel;
+  patientList: IPatientModel[]
 }
 
 class PatientPage extends React.Component<Props, IState> {
   private paginator: Paginator;
+  //   componentDidMount() {
+  //   wait(async () => {
+  //     // Lets tell Node.js to wait for the request completion.
+  //     // It's necessary when you want to see the fethched data
+  //     // in your prerendered HTML code (by SSR).
+  //     await this.props.searchAction();
+  //   }, "patientPageTask");
+  // };
 
   private debouncedSearch: (
     firstNameSearch: string
     // lastNameSearch: string
   ) => void;
-  componentDidMount() {
-    this.renderRows(this.props.patients.patients);
-  }
+
   //passed a actionCreator from the Redux store, the actionCreator invokes the Service that calls the API
   constructor(props: Props) {
     super(props);
@@ -45,23 +52,37 @@ class PatientPage extends React.Component<Props, IState> {
       firstNameSearch: "",
       // lastNameSearch: "",
       currentPageNum: 1,
-      limitPerPage: 5,
+      limitPerPage: ,
       isSelectModalOpen: false,
       modelForEdit: null,
+      patientList: []
+      
     };
+    // private  mapStateToProps(state: IState){
 
-    // "AwesomeDebouncePromise" makes a delay between
-    // the end of input term and search request.
-    this.debouncedSearch = AwesomeDebouncePromise((firstName: string) => {
-      props.searchAction(firstName);
-    }, 3000);
-
-    wait(async () => {
+    // }
+    this.debouncedSearch = (firstName) =>   wait(async () => {
+      
+        props.loadThunk(firstName)          ;      
+      
       // Lets tell Node.js to wait for the request completion.
       // It's necessary when you want to see the fethched data
       // in your prerendered HTML code (by SSR).
-      await this.props.searchAction();
+      //await this.props.searchAction();
     }, "patientPageTask");
+
+      // "AwesomeDebouncePromise" makes a delay between
+      // the end of input term and search request.
+    //   wait(async () => {
+    //   this.debouncedSearch = AwesomeDebouncePromise((firstName: string) => {
+    //     getPromiseFromActionCreator(props.loadThunk())
+    //       ;      }, 500);
+      
+    //   // Lets tell Node.js to wait for the request completion.
+    //   // It's necessary when you want to see the fethched data
+    //   // in your prerendered HTML code (by SSR).
+    //   //await this.props.searchAction();
+    // }, "patientPageTask");
   }
 
   private toggleSelectPatientModal = (modelForEdit?: IPatientModel) => {
@@ -79,6 +100,7 @@ class PatientPage extends React.Component<Props, IState> {
     )) as any) as Result<string>;
 
     if (!result.hasErrors) {
+      
       this.paginator.setLastPage();
       this.toggleSelectPatientModal();
     }
@@ -90,31 +112,22 @@ class PatientPage extends React.Component<Props, IState> {
       }
     );
   };
-  private renderRows = (arr: IPatientModel[]) => {
-   
-    return paginate(
-      arr, //this is null
-      this.state.currentPageNum,
-      this.state.limitPerPage
-    ).map((patient) => (
-      <tr key={patient.id}>
-        <td>{patient.firstName}</td>
-        <td>{patient.lastName}</td>
-        <td>
-          <button
-            className="btn btn-info"
-            // onClick={(x) => this.toggleSelectPatientModal(patient)}
-          >
-            Select
-          </button>
-          &nbsp;
-        </td>
-      </tr>
-    ));
-  };
+  private searchPersonToState = (data: string) => this.props.searchAction(data);
 
-  private onChangeFirstSearchInput = (
-    e: React.ChangeEvent<HTMLInputElement>
+  private renderRows = (arr: IPatientModel[]) =>
+    paginate(arr, this.state.currentPageNum, this.state.limitPerPage).map(
+      (patient) => (
+        <tr key={patient.id}>
+          <td>{patient.firstName}</td>
+          <td>{patient.lastName}</td>
+          <td>
+            <button className="btn btn-info">Select</button>
+            &nbsp;
+          </td>
+        </tr>
+      )
+    );
+  private onChangeFirstSearchInput = (e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const val = e.currentTarget.value;
     this.debouncedSearch(val);
@@ -181,10 +194,7 @@ class PatientPage extends React.Component<Props, IState> {
               <th></th>
             </tr>
           </thead>
-          <tbody> {async ()=>this.renderRows //cant pass a function like this
-          (await this.searchPerson(this.state.firstNameSearch).then((p) => {
-      return p;
-    }))}</tbody>
+          <tbody>{this.renderRows(this.props.patients)}</tbody>
         </table>
 
         {/* select modal */}
@@ -215,7 +225,7 @@ class PatientPage extends React.Component<Props, IState> {
 
         <Paginator
           ref={(x) => (this.paginator = x)}
-          totalResults={this.props.patients.patients.length}
+          totalResults={this.props.patients.length}
           limitPerPage={this.state.limitPerPage} //implement the paging here
           currentPage={this.state.currentPageNum}
           onChangePage={(pageNum) => this.setState({ currentPageNum: pageNum })}
@@ -226,7 +236,7 @@ class PatientPage extends React.Component<Props, IState> {
 }
 
 // Connect component with Redux store.
-const connectedComponent = withStore(
+let connectedComponent = withStore(
   PatientPage,
   (state) => state.patient, // Selects which state properties are merged into the component's props.
   patientStore.actionCreators // Selects which action creators are merged into the component's props.

@@ -3,7 +3,8 @@ using MediatR;
 using LockStepBlazor.Application;
 using LockStepBlazor.Application.Fhir.Queries;
 using ReactTypescriptBP.Infrastructure;
-
+using System.Collections.Generic;
+using ReactTypescriptBP.Models;
 
 namespace LockStepBlazor.Data.Services
 {
@@ -11,17 +12,29 @@ namespace LockStepBlazor.Data.Services
     {
         private readonly IMediator mediator;
 
+        public PatientListModel PatientList { get;  set; }
+        
         public PatientService(IMediator mediator){
             this.mediator = mediator;
+            PatientList =
+                new PatientListModel(
+                    new List<PatientModel>()
+                    {
+                        new PatientModel("0", "James", "Bock")
+                    }
+                , "badlink", "badlink", "badlink", "badlink");
+
         }
 
-          public async virtual Task<Result<GetPatientList.Model>> SearchAsync(string firstName = null)
+          public async virtual Task<Result<PatientListModel>> SearchAsync(string firstName = null)
         {
-            
-            return Ok(await mediator.Send(new GetPatientList.Query()
+            var list = await mediator.Send(new GetPatientList.Query(){ FirstName = firstName});
+            if (list.Payload.Patients.Count == 0)
             {
                
-            }).ConfigureAwait(false));
+            return Ok(PatientList);
+            }
+            else    return Ok(list.Payload);
 
         }
         public async Task<GetPatient.Model> GetAsync(string id)

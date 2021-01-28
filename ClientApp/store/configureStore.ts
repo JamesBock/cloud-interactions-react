@@ -46,5 +46,5 @@ const routerReducer = (history) => {
 };
 
 function buildRootReducer(allReducers: ReducersMapObject, history) {
-    return combineReducers<IApplicationState>({...allReducers, ...{ router: routerReducer(history) }} as any);
+    return combineReducers<IApplicationState>({ ...allReducers, ...{ router: routerReducer(history) } } as any);
 }

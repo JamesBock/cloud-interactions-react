@@ -61,7 +61,7 @@ namespace ReactTypescriptBP
               .ConfigureWebHostDefaults(webBuilder =>
               {
                   webBuilder
-                  .UseKestrel()
+                  .UseIISIntegration()
                   .ConfigureKestrel(serverOptions =>
                   {
                         // Set properties and call methods on options.
