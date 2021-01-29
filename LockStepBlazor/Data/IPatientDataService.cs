@@ -16,8 +16,8 @@ namespace LockStepBlazor.Data
     {
         Task<IGetDrugInteractions.Model> GetDrugInteractionListAsync(List<string> rxcuis);
         Task<IGetFhirMedications.Model> GetMedicationRequestsAsync(string id);
-       
-        Task<NavigateBundle.Model> NavigateBundleAsync(Bundle bundle, PageDirection nav);
+
+        // Task<NavigateBundle.Model> NavigateBundleAsync(Bundle bundle, PageDirection nav);
         Task<GetRxCuiListAPI.Model> GetRxCuisAsync(List<MedicationConceptDTO> requests);
         Task<ParseInteractions.Model> ParseInteractionsAsync(string jstring, List<MedicationConceptDTO> meds);
     }

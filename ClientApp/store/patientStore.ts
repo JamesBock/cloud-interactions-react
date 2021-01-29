@@ -5,45 +5,48 @@ import PatientService from "@Services/PatientService";
 
 // Declare an interface of the store's state.
 export interface IPatientStoreState {
-    isFetching: boolean;
-    patients: IPatientModel[];
-    firstLink: string;
-    lastLink: string;
-    nextLink: string;
-    previousLink: string;
+  isFetching: boolean;
+  patients: IPatientModel[];
+  firstLink: string;
+  lastLink: string;
+  nextLink: string;
+  previousLink: string;
+  total: number;
 }
 
 // Create the slice.
- const slice = createSlice({
-    name: "patient",
-    initialState: {
-        isFetching: false,
-        // patients: {
-        //     firstLink: "",
-        //     previousLink: "",
-        //     nextLink: "",
-        //     lastLink: "",
-            patients: [],
-        //}, //as IPatientListModel,
-        firstLink: "",
-        lastLink: "",
-        nextLink:"",
-        previousLink:""
-    } as IPatientStoreState,
-    reducers: {
-        setFetching: (state, action: PayloadAction<boolean>) => {
-            state.isFetching = action.payload;
-            //state.patients = state.patients
-        },
-        setData: (state, action: PayloadAction<IPatientListModel>) => {
-            const pats : IPatientModel[] = action.payload.patients.map(p => p );
-            state.patients = pats,
-            state.firstLink = action.payload.firstLink,
-            state.lastLink = action.payload.lastLink,
-            state.nextLink = action.payload.nextLink,
-            state.previousLink = action.payload.previousLink
-        },
+const slice = createSlice({
+  name: "patient",
+  initialState: {
+    isFetching: false,
+    // patients: {
+    //     firstLink: "",
+    //     previousLink: "",
+    //     nextLink: "",
+    //     lastLink: "",
+    patients: [],
+    //}, //as IPatientListModel,
+    firstLink: "",
+    lastLink: "",
+    nextLink: "",
+    previousLink: "",
+    total: 0,
+  } as IPatientStoreState,
+  reducers: {
+    setFetching: (state, action: PayloadAction<boolean>) => {
+      state.isFetching = action.payload;
+      //state.patients = state.patients
     },
+    setData: (state, action: PayloadAction<IPatientListModel>) => {
+      const pats: IPatientModel[] = action.payload.patients.map((p) => p);
+      (state.patients = pats),
+        (state.firstLink = action.payload.firstLink),
+        (state.lastLink = action.payload.lastLink),
+        (state.nextLink = action.payload.nextLink),
+        (state.previousLink = action.payload.previousLink),
+        (state.total = action.payload.total);
+    },
+  },
 });
 
 // Export reducer from the slice.
@@ -51,49 +54,52 @@ export const { reducer } = slice;
 
 // Define action creators.
 export const actionCreators = {
-    searchAction: (firstName?: string) => async (dispatch: Dispatch) => {
-        dispatch(slice.actions.setFetching(true));
+  searchAction: (limitTo: number, firstName?: string) => async (
+    dispatch: Dispatch
+  ) => {
+    dispatch(slice.actions.setFetching(true));
 
-        const service = new PatientService();
+    const service = new PatientService();
 
-        const result = await service.search(firstName); //API call
+    const result = await service.search(limitTo, firstName); //API call
 
-        if (!result.hasErrors) {
-            dispatch(slice.actions.setData(result.value));
-        }
-
-        dispatch(slice.actions.setFetching(false));
-
-        return result;
-    },
-    loadThunk: (name) => (dispatch) => {
-        dispatch(slice.actions.setFetching(true));
-
-        const service = new PatientService();
-
-        const result = service
-            .search(name)
-            .then((patientList) => {
-                dispatch(slice.actions.setData(patientList.value));
-            })
-            .catch((error) => {
-                throw error;
-            });
-        return result;
+    if (!result.hasErrors) {
+      dispatch(slice.actions.setData(result.value));
     }
-    // read: (id?: string) => async (dispatch: Dispatch) => {
-    //     dispatch(slice.actions.setFetching(true));
 
-    //     const service = new PatientService();
+    dispatch(slice.actions.setFetching(false));
 
-    //     const result = await service.read(id);//API call
+    return result;
+  },
 
-    //     if (!result.hasErrors) {
-    //         dispatch(slice.actions.setData(result.value));
-    //     }
+  loadNext: (nextLink: string, count : number) => (dispatch) => {
+    dispatch(slice.actions.setFetching(true));
 
-    //     dispatch(slice.actions.setFetching(false));
+    const service = new PatientService();
 
-    //     return result;
-    // }
+    const result = service
+      .next(nextLink, count)
+      .then((patientList) => {
+        dispatch(slice.actions.setData(patientList.value));
+      })
+      .catch((error) => {
+        throw error;
+      });
+    return result;
+  },
+  // read: (id?: string) => async (dispatch: Dispatch) => {
+  //     dispatch(slice.actions.setFetching(true));
+
+  //     const service = new PatientService();
+
+  //     const result = await service.read(id);//API call
+
+  //     if (!result.hasErrors) {
+  //         dispatch(slice.actions.setData(result.value));
+  //     }
+
+  //     dispatch(slice.actions.setFetching(false));
+
+  //     return result;
+  // }
 };

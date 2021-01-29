@@ -46,7 +46,7 @@ export default class Paginator extends React.Component<IProps, {}> {
             }) => (
                     <Pagination>
 
-                        <Pagination.Item
+                        <Pagination.Item disabled
                             ref={x => this.firstPageBtn = x as any}
                             key={`first`}
                             {...getPageItemProps({
@@ -55,10 +55,10 @@ export default class Paginator extends React.Component<IProps, {}> {
                                 onPageChange: (num, e) => this.props.onChangePage(num)
                             })}
                         >
-                            first
+                            1
                     </Pagination.Item>
 
-                        {hasPreviousPage && (
+                        { (
                             <Pagination.Item
                                 key={`prev`}
                                 {...getPageItemProps({
@@ -70,9 +70,9 @@ export default class Paginator extends React.Component<IProps, {}> {
                                 {`<`}
                             </Pagination.Item>
                         )}
-
+                {/* replace the page nums with ellipsis */}
                         {pages.map(page => {
-                            return <Pagination.Item
+                            return <Pagination.Item disabled
                                 key={page}
                                 active={page === currentPage}
                                 {...getPageItemProps({
@@ -85,20 +85,20 @@ export default class Paginator extends React.Component<IProps, {}> {
                             </Pagination.Item>;
                         })}
 
-                        {hasNextPage && (
-                            <Pagination.Item
+                        { (
+                            <Pagination.Item 
                                 key={`next`}
                                 {...getPageItemProps({
                                     total: totalPages,
                                     pageValue: nextPage,
-                                    onPageChange: (num, e) => this.props.onChangePage(num)
+                                    onPageChange: (num, e) => this.props.onChangePage(num),
                                 })}
                             >
                                 {`>`}
                             </Pagination.Item>
                         )}
-
-                        <Pagination.Item
+                        {/* <Pagination.Ellipsis /> */}
+                        <Pagination.Item disabled
                             ref={x => this.lastPageBtn = x as any}
                             key={`last`}
                             {...getPageItemProps({
@@ -107,7 +107,7 @@ export default class Paginator extends React.Component<IProps, {}> {
                                 onPageChange: (num, e) => this.props.onChangePage(num)
                             })}
                         >
-                            last
+                        {`${Math.ceil(this.props.totalResults/this.props.limitPerPage)}`}
                     </Pagination.Item>
 
                     </Pagination>

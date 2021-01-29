@@ -3,12 +3,12 @@ import { ServiceBase } from "@Core/ServiceBase";
 import SessionManager, { IServiceUser } from "@Core/session";
 import { IPatientModel } from "@Models/IPatientModel";
 import { IPatientListModel } from "@Models/IPatientListModel";
+import Axios from "axios";
 
 export default class PatientService extends ServiceBase {
-  
   public async search(
+    limitTo: number,
     firstName: string = null
-  
   ): Promise<Result<IPatientListModel>> {
     // const url = `/api/Patient/Search?`;
 
@@ -19,7 +19,7 @@ export default class PatientService extends ServiceBase {
     //   lastName = lastName !==null && lastName !==""? `lastName=${lastName}` : "" ;
     //   url = `${url}${firstName}${lastName}`;
     // }
-    const url =  `/api/Patient/Search?`
+    const url = `/api/Patient/Search?limitTo=${limitTo}&`;
     if (firstName == null) {
       firstName = "";
     }
@@ -39,7 +39,15 @@ export default class PatientService extends ServiceBase {
     });
     return result;
   }
+
+  public async next(nextLink: string, count: number): Promise<Result<IPatientListModel>>  {
+    const result = await this.requestJson<IPatientListModel>({
+      url: `/api/Patient/Next?count=${count}`,
+      method: "GET",
+    });
+    return result;
   
+  }
   public async read(id: string = null): Promise<Result<IPatientModel>> {
     const result = await this.requestJson<IPatientModel>({
       url: `/api/Patient/Read?${id}`,

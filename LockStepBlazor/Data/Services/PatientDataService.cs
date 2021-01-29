@@ -84,22 +84,15 @@ namespace LockStepBlazor.Data.Services
             }).ConfigureAwait(false);
 
         }
-        public async Task<GetPatientList.Model> GetPatientListAsync(string firstName, string lastName)
+        public async Task<SearchPatient.Model> GetPatientListAsync(string firstName, string lastName)
         {
-            return await mediator.Send(new GetPatientList.Query()
+            return await mediator.Send(new SearchPatient.Query()
             {
                 FirstName = firstName
                 // LastName = lastName
             }).ConfigureAwait(false);
         }
-        public async Task<NavigateBundle.Model> NavigateBundleAsync(Bundle bundle, PageDirection nav)
-        {
-            return await mediator.Send(new NavigateBundle.Query()
-            {
-                Bundle = bundle,
-                Nav = nav
-            }).ConfigureAwait(false);
-        }
+       
 
     }
 }
