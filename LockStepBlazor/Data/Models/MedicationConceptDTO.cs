@@ -11,8 +11,8 @@ namespace LockStepBlazor.Data.Models
         public string FhirType { get; set; }
         public string ResourceId { get; set; }
         public string Prescriber { get; set; }
-        public DateTimeOffset? TimeOrdered { get; set; }
         //public HttpResponseMessage RxCuiResponse { get; set; }
         public string RxCui { get; set; }
+        public DateTimeOffset? TimeOrdered { get; set; }
     }
 }

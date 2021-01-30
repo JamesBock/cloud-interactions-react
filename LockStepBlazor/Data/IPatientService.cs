@@ -4,6 +4,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using LockStepBlazor.Application;
 using LockStepBlazor.Application.Fhir.Queries;
+using LockStepBlazor.Application.Interfaces;
 using ReactTypescriptBP.Infrastructure;
 using ReactTypescriptBP.Models;
 

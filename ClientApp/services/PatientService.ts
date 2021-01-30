@@ -3,7 +3,7 @@ import { ServiceBase } from "@Core/ServiceBase";
 import SessionManager, { IServiceUser } from "@Core/session";
 import { IPatientModel } from "@Models/IPatientModel";
 import { IPatientListModel } from "@Models/IPatientListModel";
-import Axios from "axios";
+
 
 export default class PatientService extends ServiceBase {
   public async search(
@@ -51,6 +51,13 @@ export default class PatientService extends ServiceBase {
   public async read(id: string = null): Promise<Result<IPatientModel>> {
     const result = await this.requestJson<IPatientModel>({
       url: `/api/Patient/Read?${id}`,
+      method: "GET",
+    });
+    return result;
+  }
+  public async interactions(id: string = null): Promise<Result<IPatientModel>> {
+    const result = await this.requestJson<IPatientModel>({
+      url: `/api/Patient/interactions/${id}`,
       method: "GET",
     });
     return result;

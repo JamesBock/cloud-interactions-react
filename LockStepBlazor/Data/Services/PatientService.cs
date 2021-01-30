@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using ReactTypescriptBP.Models;
 using Hl7.Fhir.Rest;
 using Hl7.Fhir.Model;
+using LockStepBlazor.Application.Interfaces;
 
 namespace LockStepBlazor.Data.Services
 {

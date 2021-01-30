@@ -35,7 +35,6 @@ const slice = createSlice({
   reducers: {
     setFetching: (state, action: PayloadAction<boolean>) => {
       state.isFetching = action.payload;
-      //state.patients = state.patients
     },
     setData: (state, action: PayloadAction<IPatientListModel>) => {
       const pats: IPatientModel[] = action.payload.patients.map((p) => p);
