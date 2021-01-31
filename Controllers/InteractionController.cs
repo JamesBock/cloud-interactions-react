@@ -30,23 +30,21 @@ namespace ReactTypescriptBP.Controllers
         {
             var interactions = new List<MedicationInteractionPair>();
             var medicationConcepts = new List<MedicationConceptDTO>();
+
             var requestResult = await PatientDataService.GetMedicationRequestsAsync(id);
             var meds = new List<MedicationConceptDTO>(requestResult.Requests);
-            System.Console.WriteLine("************************START***************************************");
-            System.Console.WriteLine(Json(meds).Value);
-            System.Console.WriteLine("************************FINISH***************************************");
             yield return Json(meds);
 
 
-            medicationConcepts = requestResult.Requests;
-            if (medicationConcepts.Count > 0)
+            meds = requestResult.Requests;
+            if (meds.Count > 0)
             {
-                var rxcuisResult = await PatientDataService.GetRxCuisAsync((medicationConcepts));
+                var rxcuisResult = await PatientDataService.GetRxCuisAsync((meds));
                 var drugResult = await PatientDataService.GetDrugInteractionListAsync((rxcuisResult).MedDtos);
-                var parsedInteractions = await PatientDataService.ParseInteractionsAsync(await drugResult.Meds, medicationConcepts);
+                var parsedInteractions = await PatientDataService.ParseInteractionsAsync(await drugResult.Meds, meds);
 
-
-                yield return Json(parsedInteractions);//links not hydrating...still missing large portion of inplementation
+                var ints = parsedInteractions.Interactions;
+                yield return Json(ints);//links not hydrating...move this implementation to ParseInterationHandler...
             }
         }
 
