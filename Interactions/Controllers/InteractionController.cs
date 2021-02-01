@@ -44,12 +44,12 @@ namespace ReactTypescriptBP.Controllers
                 var parsedInteractions = await PatientDataService.ParseInteractionsAsync(await drugResult.Meds, meds);
 
                 var ints = parsedInteractions.Interactions;
-                yield return Json(ints);//links not hydrating...move this implementation to ParseInterationHandler...
+                yield return Json(ints);//links not hydrating...moved this implementation to ParseInterationHandler...
             }
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetMedications([FromRoute] string id)
+        public async Task<IActionResult> Medications([FromRoute] string id)
         {
     
             var requestResult = await PatientDataService.GetMedicationRequestsAsync(id);

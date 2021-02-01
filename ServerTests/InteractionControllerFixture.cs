@@ -70,10 +70,23 @@ namespace ServerTests
             PatientDataService.MedDTOs = meds;
 
             //act
-            var model = SystemUnderTest.GetMedications("dummyId");
+            var model = SystemUnderTest.Medications("dummyId");
             var expected = SystemUnderTest.Json(new Result<List<MedicationConceptDTO>>(meds.Requests));
             //assert
             expected.ShouldDeepEqual(model.Result);
+        }
+
+        public void WhenInteractionsCalledReturnFentanylRizInteractions()
+        {
+              var meds = new IGetFhirMedications.Model()
+            {
+                Requests = new List<MedicationConceptDTO>()
+                {
+                    UnitTestUtility.GetFentanylDTOasRequest(),
+                    UnitTestUtility.GetRizatriptanDTOasRequest(),
+             }
+            };
+            PatientDataService.MedDTOs = meds;
         }
     }
 }

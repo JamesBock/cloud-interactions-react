@@ -51,7 +51,7 @@ namespace ServerTests
         }
 
         /// <summary>
-        /// Using an extension method in the body of this method to delegate the creation of the Query to the extension method. Really unsure if this is beneficial
+        /// Using an extension method in the body of this method to delegate the creation of the Query to the extension method. unsure if this is beneficial
         /// </summary>
         /// <param name="medDtos"></param>
         /// <returns></returns>
@@ -59,6 +59,7 @@ namespace ServerTests
         {
             return await mediator.GetDrugInteractions(medDtos).ConfigureAwait(false);
         }
+       
         public async Task<ParseInteractions.Model> ParseInteractionsAsync(string jstring, List<MedicationConceptDTO> meds)
         {
             return await mediator.Send(new ParseInteractions.Query()
