@@ -6,7 +6,7 @@ namespace ReactTypescriptBP.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PersonController : ControllerBase
+    public class PersonController : BaseController
     {
         private PersonService PersonService { get; }
 

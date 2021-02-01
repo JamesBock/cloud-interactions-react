@@ -8,7 +8,7 @@ namespace ReactTypescriptBP.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    public class AccountController : BaseController
     {
         private AccountService AccountService { get; set; }
 

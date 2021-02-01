@@ -5,7 +5,7 @@ using ReactTypescriptBP.Infrastructure;
 
 namespace ReactTypescriptBP.Controllers
 {
-    public class MainController : ControllerBase
+    public class MainController : BaseController
     {
         public IActionResult Index()
         {

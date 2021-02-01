@@ -14,7 +14,7 @@ namespace ReactTypescriptBP.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PatientController : ControllerBase
+    public class PatientController : BaseController
     {
         private IMemoryCache cache;
         private MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions();

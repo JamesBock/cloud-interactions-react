@@ -13,7 +13,7 @@ namespace ReactTypescriptBP.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class InteractionController : ControllerBase
+    public class InteractionController : BaseController
     {
         private IMemoryCache cache;
         protected IDrugInteractionParserAsync DrugInteractionParser { get; set; }
@@ -51,9 +51,9 @@ namespace ReactTypescriptBP.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetMedications([FromRoute] string id)
         {
-            var medicationConcepts = new List<MedicationConceptDTO>();
+    
             var requestResult = await PatientDataService.GetMedicationRequestsAsync(id);
-            var MedDtos = new Result<List<MedicationConceptDTO>>(medicationConcepts);
+            var MedDtos = new Result<List<MedicationConceptDTO>>(requestResult.Requests);
             return Json(MedDtos);
         }
     }
