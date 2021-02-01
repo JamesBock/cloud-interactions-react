@@ -10,15 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-<<<<<<< HEAD
             "program": "${workspaceFolder}/Interactions/bin/Debug/netcoreapp3.1/ReactTypescriptBP.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Interactions",
-=======
-            "program": "${workspaceFolder}/ReactTypescriptBP/bin/Debug/netcoreapp3.1/ReactTypescriptBP.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/ReactTypescriptBP",
->>>>>>> main
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

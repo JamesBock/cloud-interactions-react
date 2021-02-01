@@ -7,11 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-<<<<<<< HEAD
                 "${workspaceFolder}/Interactions/ReactTypescriptBP.csproj",
-=======
-                "${workspaceFolder}/ReactTypescriptBP/ReactTypescriptBP.csproj",
->>>>>>> main
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -23,11 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-<<<<<<< HEAD
                 "${workspaceFolder}/Interactions/ReactTypescriptBP.csproj",
-=======
-                "${workspaceFolder}/ReactTypescriptBP/ReactTypescriptBP.csproj",
->>>>>>> main
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -40,11 +32,7 @@
             "args": [
                 "watch",
                 "run",
-<<<<<<< HEAD
                 "${workspaceFolder}/Interactions/ReactTypescriptBP.csproj",
-=======
-                "${workspaceFolder}/ReactTypescriptBP/ReactTypescriptBP.csproj",
->>>>>>> main
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

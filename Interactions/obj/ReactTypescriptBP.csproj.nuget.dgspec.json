@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "g:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj": {}
+    "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj": {}
   },
   "projects": {
-    "g:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj": {
+    "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "g:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj",
+        "projectUniqueName": "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj",
         "projectName": "ReactTypescriptBP",
-        "projectPath": "g:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj",
+        "projectPath": "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj",
         "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "g:\\Repos\\cloud-interactions-react\\Interactions\\obj\\",
+        "outputPath": "G:\\Repos\\cloud-interactions-react\\Interactions\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",

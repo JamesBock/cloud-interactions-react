@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Repos\\ReactTypescriptBP\\ServerTests\\ServerTests.csproj": {}
+    "G:\\Repos\\cloud-interactions-react\\ServerTests\\ServerTests.csproj": {}
   },
   "projects": {
-    "G:\\Repos\\ReactTypescriptBP\\ReactTypescriptBP\\ReactTypescriptBP.csproj": {
+    "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Repos\\ReactTypescriptBP\\ReactTypescriptBP\\ReactTypescriptBP.csproj",
+        "projectUniqueName": "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj",
         "projectName": "ReactTypescriptBP",
-        "projectPath": "G:\\Repos\\ReactTypescriptBP\\ReactTypescriptBP\\ReactTypescriptBP.csproj",
+        "projectPath": "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj",
         "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "G:\\Repos\\ReactTypescriptBP\\ReactTypescriptBP\\obj\\",
+        "outputPath": "G:\\Repos\\cloud-interactions-react\\Interactions\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -119,14 +119,14 @@
         }
       }
     },
-    "G:\\Repos\\ReactTypescriptBP\\ServerTests\\ServerTests.csproj": {
+    "G:\\Repos\\cloud-interactions-react\\ServerTests\\ServerTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Repos\\ReactTypescriptBP\\ServerTests\\ServerTests.csproj",
+        "projectUniqueName": "G:\\Repos\\cloud-interactions-react\\ServerTests\\ServerTests.csproj",
         "projectName": "ServerTests",
-        "projectPath": "G:\\Repos\\ReactTypescriptBP\\ServerTests\\ServerTests.csproj",
+        "projectPath": "G:\\Repos\\cloud-interactions-react\\ServerTests\\ServerTests.csproj",
         "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "G:\\Repos\\ReactTypescriptBP\\ServerTests\\obj\\",
+        "outputPath": "G:\\Repos\\cloud-interactions-react\\ServerTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -143,8 +143,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "G:\\Repos\\ReactTypescriptBP\\ReactTypescriptBP\\ReactTypescriptBP.csproj": {
-                "projectPath": "G:\\Repos\\ReactTypescriptBP\\ReactTypescriptBP\\ReactTypescriptBP.csproj"
+              "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj": {
+                "projectPath": "G:\\Repos\\cloud-interactions-react\\Interactions\\ReactTypescriptBP.csproj"
               }
             }
           }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DvpmgS40mHh9LqMdvEAsyFpzP8++JeoFidHSHRCQ+J71r1HjuvRLKi1v1M+u0YIeiEUQkHXeEIAFsGvpyawtbg==",
+  "dgSpecHash": "Oyota3Pubj6CRAO4K3L3HKFLSedx/rX0npq28eoW/+wr8O9aF2aCScWrqPGW3FY7vCYmkOf9p8MaW1skYP8Hqw==",
   "success": true,
-  "projectFilePath": "G:\\Repos\\ReactTypescriptBP\\ServerTests\\ServerTests.csproj",
+  "projectFilePath": "G:\\Repos\\cloud-interactions-react\\ServerTests\\ServerTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\james\\.nuget\\packages\\coverlet.collector\\1.3.0\\coverlet.collector.1.3.0.nupkg.sha512",
     "C:\\Users\\james\\.nuget\\packages\\deepequal\\2.0.0\\deepequal.2.0.0.nupkg.sha512",

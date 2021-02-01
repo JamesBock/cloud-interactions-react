@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReactTypescriptBP\ReactTypescriptBP.csproj" />
+    <ProjectReference Include="..\Interactions\ReactTypescriptBP.csproj" />
   </ItemGroup>
 
 </Project>
