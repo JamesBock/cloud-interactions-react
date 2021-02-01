@@ -4,7 +4,7 @@ using ReactTypescriptBP.Infrastructure;
 
 namespace ReactTypescriptBP.Controllers
 {
-    public class ControllerBase : Controller
+    public class BaseController : Controller
     {
         protected ServiceUser ServiceUser { get; set; }
 
