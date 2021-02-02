@@ -86,7 +86,7 @@ export const actionCreators = {
       });
     return result;
   },
-  // read: (id?: string) => async (dispatch: Dispatch) => {
+  // read: (id: string) => async (dispatch: Dispatch) => {
   //     dispatch(slice.actions.setFetching(true));
 
   //     const service = new PatientService();

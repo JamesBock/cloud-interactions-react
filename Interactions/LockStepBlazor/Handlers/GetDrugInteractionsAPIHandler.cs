@@ -19,7 +19,7 @@ namespace LockStepBlazor.Handlers
        
         public GetDrugInteractionsAPIHandler(HttpClient httpClient) : base(httpClient)
         {
-            //httpClient = httpClient;
+            
         }
 
         public override async Task<IGetDrugInteractions.Model> Handle(IGetDrugInteractions.Query request, CancellationToken cancellationToken)

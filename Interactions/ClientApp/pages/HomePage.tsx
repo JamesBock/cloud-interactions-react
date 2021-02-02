@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps , Redirect, NavLink } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import logo from "@Images/logo.png";
 import { Button } from "react-bootstrap";
@@ -12,12 +12,12 @@ const HomePage: React.FC<Props> = () => {
   return (
     <div>
       <Helmet>
-        <title>Patient Search</title>
+        <title>Welcome</title>
       </Helmet>
           <br />
 
           {/* <img style={{ "margin": "0 auto", "display": "block", "width": "60%" }} src={logo} /> */}
-          <LinkContainer exact to={'/patient'}>
+          <LinkContainer exact to={'/patientSearch'}>
                     <Nav.Link>Search</Nav.Link>
                 </LinkContainer>
       

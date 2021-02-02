@@ -424,3 +424,5 @@ G:\Repos\cloud-interactions-react\ServerTests\obj\Debug\net5.0\ServerTests.dll
 G:\Repos\cloud-interactions-react\ServerTests\obj\Debug\net5.0\ref\ServerTests.dll
 G:\Repos\cloud-interactions-react\ServerTests\obj\Debug\net5.0\ServerTests.pdb
 G:\Repos\cloud-interactions-react\ServerTests\obj\Debug\net5.0\ServerTests.genruntimeconfig.cache
+g:\Repos\cloud-interactions-react\ServerTests\bin\Debug\net5.0\Castle.Core.dll
+g:\Repos\cloud-interactions-react\ServerTests\bin\Debug\net5.0\Moq.dll

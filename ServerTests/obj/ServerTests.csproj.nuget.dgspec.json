@@ -167,6 +167,10 @@
               "target": "Package",
               "version": "[16.7.1, )"
             },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.16.0, )"
+            },
             "System.Linq.Async": {
               "target": "Package",
               "version": "[5.0.0, )"

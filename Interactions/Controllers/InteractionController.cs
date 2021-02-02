@@ -40,7 +40,7 @@ namespace ReactTypescriptBP.Controllers
             if (meds.Count > 0)
             {
                 var rxcuisResult = await PatientDataService.GetRxCuisAsync((meds));
-                var drugResult = await PatientDataService.GetDrugInteractionListAsync((rxcuisResult).MedDtos);
+                var drugResult = await PatientDataService.GetDrugInteractionListAsync((rxcuisResult).RxCuis);
                 var parsedInteractions = await PatientDataService.ParseInteractionsAsync(await drugResult.Meds, meds);
 
                 var ints = parsedInteractions.Interactions;

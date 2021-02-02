@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LockStepBlazor.Application.Interfaces
-{
+{/// <summary>
+/// this is the response from the NLM drug interaction api
+/// </summary>
     public interface IGetDrugInteractions
     {
         public class Query : IRequest<Model>

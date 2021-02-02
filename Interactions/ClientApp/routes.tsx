@@ -6,6 +6,7 @@ import AppRoute from "@Components/shared/AppRoute";
 import HomePage from '@Pages/HomePage';
 import ExamplesPage from '@Pages/ExamplesPage';
 import PatientPage from '@Pages/PatientPage';
+import PatientSearchPage from '@Pages/PatientSearchPage';
 import { Switch } from 'react-router-dom';
 import NotFoundPage from '@Pages/NotFoundPage';
 
@@ -13,6 +14,7 @@ export const routes = <Switch>
     <AppRoute layout={GuestLayout} exact path="/login" component={LoginPage} />
     <AppRoute layout={AuthorizedLayout} exact path="/" component={HomePage} />
     <AppRoute layout={AuthorizedLayout} exact path="/example" component={ExamplesPage} />
+    <AppRoute layout={AuthorizedLayout} exact path="/patientSearch" component={PatientSearchPage} />
     <AppRoute layout={AuthorizedLayout} exact path="/patient" component={PatientPage} />
     <AppRoute layout={GuestLayout} path="*" component={NotFoundPage} statusCode={404} />
 </Switch>;

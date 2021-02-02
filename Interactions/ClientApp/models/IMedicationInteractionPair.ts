@@ -1,29 +1,43 @@
-export interface IMedicationInteractionPair {
-  interactionId: string;
-  comment: string;
-  medicationPair: [
-    IMedicationInteractionViewModel,
-    IMedicationInteractionViewModel
-  ];
-  drugInteractionDetails: IInteractionDetail[];
-}
+import 'reflect-metadata';
+import { jsonObject, jsonMember, jsonArrayMember, jsonSetMember, jsonMapMember, TypedJSON } from 'typedjson';
 
-export interface IInteractionDetail {
+@jsonObject
+export class IInteractionDetail {
+  @jsonMember
   interactionAssertion: string;
+  @jsonMember
   severity: string;
+  @jsonMember
   description: string;
-  linkTupList: [string, URL][];
+  @jsonMapMember(String, URL)
+  linkTupList: { item1: string; item2: URL; }[];
 }
-
-export interface IMedicationInteractionViewModel {
+@jsonObject
+export class IMedicationInteractionViewModel {
+  @jsonMember
   interactionId: string;
+  @jsonMember
   displayName: string;
+  @jsonMember 
   rxCui: string;
+  @jsonMember 
   fhirType: string;
+  @jsonMember 
   timeOrdered: string | null;
+  @jsonMember 
   resourceId: string;
+  @jsonMember 
   prescriber: string;
 }
-// c# to ts extension made tuples like below lang reference is different, as implemented above
-// linkTupList: { item1: string; item2: URL; }[];
-// medicationPair: { item1: MedicationInteractionViewModel; item2: MedicationInteractionViewModel; };
+
+@jsonObject
+export class IMedicationInteractionPair {
+  @jsonMember
+  interactionId: string;
+  @jsonMember
+  comment: string;
+  @jsonMapMember(IMedicationInteractionViewModel,IMedicationInteractionViewModel)
+  medicationPair: { item1: IMedicationInteractionViewModel; item2: IMedicationInteractionViewModel; };
+  @jsonArrayMember(IInteractionDetail)
+  drugInteractionDetails: IInteractionDetail[];
+}

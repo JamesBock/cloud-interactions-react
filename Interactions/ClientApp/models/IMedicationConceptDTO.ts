@@ -1,4 +1,4 @@
-export interface IMedicationConceptDTO {
+export class IMedicationConceptDTO {
   Sys: string;
   CodeString: string;
   Text: string;

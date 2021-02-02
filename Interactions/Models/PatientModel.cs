@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using LockStepBlazor.Data.Models;
 
 namespace ReactTypescriptBP.Models
 {
@@ -15,6 +17,7 @@ namespace ReactTypescriptBP.Models
         public string Id { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-
+        public List<MedicationConceptDTO> Medications { get; set; } = new List<MedicationConceptDTO>();
+        public int RoomId { get; set; }
     }
 }

@@ -54,7 +54,7 @@ namespace LockStepBlazor.Handlers
 
                 request.Requests.Add(item.Item2);
             }
-            return new GetRxCuiListAPI.Model() { MedDtos = _rxCuis };
+            return new GetRxCuiListAPI.Model() { RxCuis = _rxCuis };
         }
         async Task FetchRxCuis(List<MedicationConceptDTO> anons) //Switching this to List from IAsyncEnumerable sped up performance significantly. Ave around 3.5 sec on first hit and upper 900ms in subsequent pings, vs 5 -6 sec and 2+ subsequent pings
         {

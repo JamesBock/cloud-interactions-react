@@ -89,7 +89,7 @@ namespace LockStepBlazor.Handlers
                 }
                 request.Requests.Add(item.Item2);
             }
-            return new GetRxCuiListAPI.Model() { MedDtos = _rxCuis };
+            return new GetRxCuiListAPI.Model() { RxCuis = _rxCuis };
             //channel.Writer.Complete();
         }
 

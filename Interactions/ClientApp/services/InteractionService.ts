@@ -1,6 +1,7 @@
 import Result from "@Core/Result";
 import { ServiceBase } from "@Core/ServiceBase";
 import SessionManager, { IServiceUser } from "@Core/session";
+import { IMedicationConceptDTO } from "@Models/IMedicationConceptDTO";
 import { IMedicationInteractionPair } from "@Models/IMedicationInteractionPair";
 import { IPatientListModel } from "@Models/IPatientListModel";
 
@@ -16,8 +17,8 @@ export default class InteractionService extends ServiceBase {
   }
   public async getMedications(
     id: string = null
-  ): Promise<Result<IMedicationInteractionPair[]>> {
-    const result = await this.requestJson<IMedicationInteractionPair[]>({
+  ): Promise<Result<IMedicationConceptDTO[]>> {
+    const result = await this.requestJson<IMedicationConceptDTO[]>({
       url: `/api/interaction/medications/${id}`,
       method: "GET",
     });

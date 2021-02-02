@@ -23,7 +23,7 @@ namespace LockStepBlazor.Application.Fhir.Queries
 
         public class Model
         {
-            public List<string> MedDtos { get; set; } = new List<string>();
+            public List<string> RxCuis { get; set; } = new List<string>();
         }
 
         public interface IHandler : IRequestHandler<Query, Model>

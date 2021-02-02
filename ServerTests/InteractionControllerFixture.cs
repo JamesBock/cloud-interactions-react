@@ -16,6 +16,7 @@ using MediatR;
 using LockStepBlazor.Data;
 using Microsoft.AspNetCore.Mvc;
 using DeepEqual.Syntax;
+using LockStepBlazor.Application.Fhir.Queries;
 // using System.Linq.Async;
 
 namespace ServerTests
@@ -76,9 +77,10 @@ namespace ServerTests
             expected.ShouldDeepEqual(model.Result);
         }
 
+        [Fact]
         public void WhenInteractionsCalledReturnFentanylRizInteractions()
         {
-              var meds = new IGetFhirMedications.Model()
+            var meds = new IGetFhirMedications.Model()
             {
                 Requests = new List<MedicationConceptDTO>()
                 {
@@ -87,6 +89,27 @@ namespace ServerTests
              }
             };
             PatientDataService.MedDTOs = meds;
+
+            if (PatientDataService.MedDTOs.Requests.Count > 0)
+            {
+                var rxcuisResult = new GetRxCuiListAPI.Model()
+                {
+                    RxCuis = UnitTestUtility.GetRxCuisForFentanylandRiz()
+                };
+
+                PatientDataService.RxCuis = rxcuisResult;
+
+                var drugResult =  new IGetDrugInteractions.Model()
+                { Meds = Task.FromResult<string>(UnitTestUtility.GetInteractionsForFentanylandRiz()) }
+                ;
+
+                PatientDataService.InterationsResponseString = drugResult;
+
+                var parsedInteractions = PatientDataService.ParseInteractionsAsync(PatientDataService.InterationsResponseString.Meds.GetAwaiter().GetResult(), PatientDataService.MedDTOs.Requests).GetAwaiter().GetResult();
+
+                var ints = SystemUnderTest.Json(parsedInteractions.Interactions);
+                var result = new Result<JsonResult>(ints);
+            }
         }
     }
 }
