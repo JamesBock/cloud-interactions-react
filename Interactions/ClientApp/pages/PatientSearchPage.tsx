@@ -47,7 +47,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
     // lastNameSearch: string
   ) => void;
 
-  private navToNextPage: (nextLink: string, count : number) => void;
+  private navToNextPage: (nextLink: string, count: number) => void;
 
   //passed a actionCreator from the Redux store, the actionCreator invokes the Service that calls the API
   constructor(props: Props) {
@@ -57,15 +57,11 @@ class PatientSearchPage extends React.Component<Props, IState> {
       firstNameSearch: "",
       // lastNameSearch: "",
       currentPageNum: 1,
-      limitPerPage: 2,
+      limitPerPage: 5,
       isSelectModalOpen: false,
       modelForEdit: null,
     };
-    this.handleSelcetClick = (id: string) => wait(async () => {
-      props.getMedications(id);
-      let history = useHistory();
-      history.push(`/patient`);
-    }, "patientSearchPageTask");
+    
 
     this.debouncedSearch = (firstName) =>
       wait(async () => {
@@ -97,9 +93,9 @@ class PatientSearchPage extends React.Component<Props, IState> {
     //   //await this.props.searchAction();
     // }, "patientPageTask");
   }
-  
+
   private handleSelcetClick: (id: string)
-    => void ;
+    => void;
 
 
   private toggleSelectPatientModal = (modelForEdit?: IPatientModel) => {
@@ -117,7 +113,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
         <td>{patient.firstName}</td>
         <td>{patient.lastName}</td>
         <td>
-          <button type="submit" onClick={()=>this.handleSelcetClick(patient.id)} className="btn btn-info">Select</button>
+          <button type="submit" onClick={() => this.handleSelcetClick(patient.id)} className="btn btn-info">Select</button>
           &nbsp;
         </td>
       </tr>
@@ -213,7 +209,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
           <Modal.Footer>
             <Button
               variant="primary"
-              // onClick={(x) => this.selectPatient(this.state.modelForEdit.id)}
+            // onClick={(x) => this.selectPatient(this.state.modelForEdit.id)}
             >
               Confirm
             </Button>
@@ -237,17 +233,17 @@ class PatientSearchPage extends React.Component<Props, IState> {
 
 
 // Connect component with Redux store.
-let connectedComponent = 
+let connectedComponent =
 
   withStore(
     PatientSearchPage,
-    (state) =>  state.patient, // Selects which state properties are merged into the component's props.
+    (state) => state.patient, // Selects which state properties are merged into the component's props.
     patientStore.actionCreators // Selects which action creators are merged into the component's props.
-    );
- 
+  );
+
 // Attach the React Router to the component to have an opportunity
 // to interract with it: use some navigation components,
 // have an access to React Router fields in the component's props, etc.
-export default 
+export default
   withRouter(connectedComponent);
 
