@@ -1,10 +1,10 @@
 export class IMedicationConceptDTO {
-  Sys: string;
-  CodeString: string;
-  Text: string;
-  FhirType: string;
-  ResourceId: string;
-  Prescriber: string;
-  RxCui: string;
-  TimeOrdered: Date; //TODO: How to convert from/to datetime
+  sys: string;
+  codeString: string;
+  text: string;
+  fhirType: string;
+  resourceId: string;
+  prescriber: string;
+  rxCui: string;
+  timeOrdered: Date; //TODO: How to convert from/to datetime
 }

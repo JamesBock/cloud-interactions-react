@@ -45,23 +45,24 @@ class PatientPage extends React.Component<Props, IState> {
  
   }
 
-
   private renderRows = (arr: IMedicationConceptDTO[]) =>
-  arr.map((med) => (
-    <tr key={med.ResourceId}>
-      <td>{med.Text}</td>
-      <td>{med.RxCui}</td>
-      <td>{med.Prescriber}</td>
+  arr.map((med, index) => (
+    <tr key={med.resourceId}>
+      <td>{med.resourceId}</td>
+      <td>{med.text}</td>
+      <td>{med.prescriber}</td>
+      <td>{med.timeOrdered}</td>
       
     </tr>
   ));
+  
   render() {
     return (
       <Container>
-        <Helmet>
-          <title>{`${this.props.activePatient.lastName}, ${this.props.activePatient.firstName}`}</title>
+        <Helmet title="{this.props.activePatient.lastName}${this.props.activePatient.firstName}">
+          {/* <title></title> */}
             </Helmet>
-            <h2>`${this.props.activePatient.lastName}, ${this.props.activePatient.firstName}`</h2>
+            <h2>{this.props.activePatient.lastName  }</h2>
             <h3>View Medications</h3>
             <table className="table">
           <thead>
@@ -69,7 +70,7 @@ class PatientPage extends React.Component<Props, IState> {
               <th>ID</th>
               <th>Name</th>
               <th>Prescriber</th>
-              <th></th>
+              <th>Date Ordered</th>
             </tr>
           </thead>
           <tbody>{this.renderRows(this.props.medications)}</tbody>
