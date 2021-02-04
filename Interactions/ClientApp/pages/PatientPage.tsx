@@ -12,16 +12,18 @@ import Result from "@Core/Result";
 import { IMedicationConceptDTO } from "@Models/IMedicationConceptDTO";
 import { RouteComponentProps, withRouter } from "react-router";
 
+
 type Props = typeof patientStore.actionCreators &
-patientStore.IPatientStoreState &
+  patientStore.IPatientStoreState &
   RouteComponentProps<{}>;
 
 interface IState {
-  
-  isSelectModalOpen: boolean;
-  
-}
 
+  isSelectModalOpen: boolean;
+
+}
+//if you make this a FC you should be able to use Hooks to get the state you need and to navigate
+//Interctions page has code for modal
 class PatientPage extends React.Component<Props, IState> {
   private paginator: Paginator;
   //   componentDidMount() {
@@ -33,38 +35,38 @@ class PatientPage extends React.Component<Props, IState> {
   //   }, "patientPageTask");
   // };
 
-  
+
   constructor(props: Props) {
     super(props);
 
     this.state = {
-     
+
       isSelectModalOpen: false,
-     
-    };  
- 
+
+    };
+
   }
 
   private renderRows = (arr: IMedicationConceptDTO[]) =>
-  arr.map((med, index) => (
-    <tr key={med.resourceId}>
-      <td>{med.resourceId}</td>
-      <td>{med.text}</td>
-      <td>{med.prescriber}</td>
-      <td>{med.timeOrdered}</td>
-      
-    </tr>
-  ));
-  
+    arr.map((med, index) => (
+      <tr key={med.resourceId}>
+        <td>{med.resourceId}</td>
+        <td>{med.text}</td>
+        <td>{med.prescriber}</td>
+        <td>{med.timeOrdered}</td>
+
+      </tr>
+    ));
+
   render() {
     return (
       <Container>
         <Helmet title="{this.props.activePatient.lastName}${this.props.activePatient.firstName}">
           {/* <title></title> */}
-            </Helmet>
-            <h2>{this.props.activePatient.lastName  }</h2>
-            <h3>View Medications</h3>
-            <table className="table">
+        </Helmet>
+        <h2>{this.props.activePatient.lastName}</h2>
+        <h3>View Medications</h3>
+        <table className="table">
           <thead>
             <tr>
               <th>ID</th>
@@ -75,7 +77,7 @@ class PatientPage extends React.Component<Props, IState> {
           </thead>
           <tbody>{this.renderRows(this.props.medications)}</tbody>
         </table>
-            <h3>Order Medication</h3>
+        <h3>Order Medication</h3>
       </Container>
     );
   }
