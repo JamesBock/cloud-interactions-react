@@ -1,11 +1,10 @@
 import "@Styles/main.scss";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { RouteComponentProps, useHistory, withRouter } from "react-router";
+import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
 import { IPatientModel as IPatientModel } from "@Models/IPatientModel";
 import { IPatientListModel as IPatientListModel } from "@Models/IPatientListModel";
 import * as patientStore from "@Store/patientStore";
-import * as interactionStore from "@Store/interactionStore";
 import { withStore } from "@Store/index";
 import Paginator from "@Components/shared/Paginator";
 import PersonEditor from "@Components/person/PersonEditor";
@@ -14,7 +13,6 @@ import { paginate, getPromiseFromActionCreator } from "@Utils";
 import { Modal, Button, Container, Row, Card } from "react-bootstrap";
 import { wait } from "domain-wait";
 import Result from "@Core/Result";
-import { useDispatch } from "react-redux";
 
 
 type Props = typeof patientStore.actionCreators &
@@ -81,8 +79,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
     };
     this.handleSelectClick = (id: string) => wait(async () => {
       props.getMedications(id);
-      let history = useHistory();
-      history.push(`/patient`);
+      props.history.push(`/patient`);
   }, "patientSearchPageTask");
     // "AwesomeDebouncePromise" makes a delay between
     // the end of input term and search request.

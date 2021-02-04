@@ -1,20 +1,19 @@
 import "@Styles/main.scss";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { RouteComponentProps, useHistory, withRouter } from "react-router";
 import { IPatientModel as IPatientModel } from "@Models/IPatientModel";
-import { IPatientListModel as IPatientListModel } from "@Models/IPatientListModel";
-import * as interactionStore from "@Store/interactionStore";
+import * as patientStore from "@Store/patientStore";
 import { withStore } from "@Store/index";
 import Paginator from "@Components/shared/Paginator";
-import PersonEditor from "@Components/person/PersonEditor";
 import { paginate, getPromiseFromActionCreator } from "@Utils";
 import { Modal, Button, Container, Row, Card } from "react-bootstrap";
 import { wait } from "domain-wait";
 import Result from "@Core/Result";
+import { IMedicationConceptDTO } from "@Models/IMedicationConceptDTO";
+import { RouteComponentProps, withRouter } from "react-router";
 
-type Props = typeof interactionStore.actionCreators &
-interactionStore.IInteractionStoreState &
+type Props = typeof patientStore.actionCreators &
+patientStore.IPatientStoreState &
   RouteComponentProps<{}>;
 
 interface IState {
@@ -46,14 +45,35 @@ class PatientPage extends React.Component<Props, IState> {
  
   }
 
+
+  private renderRows = (arr: IMedicationConceptDTO[]) =>
+  arr.map((med) => (
+    <tr key={med.ResourceId}>
+      <td>{med.Text}</td>
+      <td>{med.RxCui}</td>
+      <td>{med.Prescriber}</td>
+      
+    </tr>
+  ));
   render() {
     return (
       <Container>
         <Helmet>
-          <title>`${this.props.activePatient.lastName}, ${this.props.activePatient.firstName}`</title>
+          <title>{`${this.props.activePatient.lastName}, ${this.props.activePatient.firstName}`}</title>
             </Helmet>
             <h2>`${this.props.activePatient.lastName}, ${this.props.activePatient.firstName}`</h2>
             <h3>View Medications</h3>
+            <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Prescriber</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>{this.renderRows(this.props.medications)}</tbody>
+        </table>
             <h3>Order Medication</h3>
       </Container>
     );
@@ -63,8 +83,8 @@ class PatientPage extends React.Component<Props, IState> {
 // Connect component with Redux store.
 let connectedComponent = withStore(
   PatientPage,
-  (state) => state.interaction, // Selects which state properties are merged into the component's props.
-  interactionStore.actionCreators // Selects which action creators are merged into the component's props.
+  (state) => state.patient, // Selects which state properties are merged into the component's props.
+  patientStore.actionCreators // Selects which action creators are merged into the component's props.
 );
 
 // Attach the React Router to the component to have an opportunity

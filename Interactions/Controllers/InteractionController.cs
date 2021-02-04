@@ -49,7 +49,7 @@ namespace ReactTypescriptBP.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Medications([FromRoute] string id)
+        public async Task<IActionResult> Medications([FromQuery] string id)
         {
     
             var requestResult = await PatientDataService.GetMedicationRequestsAsync(id);

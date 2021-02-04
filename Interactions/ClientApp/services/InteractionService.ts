@@ -19,7 +19,7 @@ export default class InteractionService extends ServiceBase {
     id: string = null
   ): Promise<Result<IMedicationConceptDTO[]>> {
     const result = await this.requestJson<IMedicationConceptDTO[]>({
-      url: `/api/interaction/medications/${id}`,
+      url: `/api/interaction/medications/?id=${id}`,
       method: "GET",
     });
     return result;
