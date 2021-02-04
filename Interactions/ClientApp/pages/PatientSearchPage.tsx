@@ -18,8 +18,7 @@ import { useDispatch } from "react-redux";
 
 
 type Props = typeof patientStore.actionCreators &
-  patientStore.IPatientStoreState & typeof interactionStore.actionCreators &
-  interactionStore.IInteractionStoreState &
+  patientStore.IPatientStoreState &
   RouteComponentProps<{}>;
 
 interface IState {
@@ -80,6 +79,11 @@ class PatientSearchPage extends React.Component<Props, IState> {
         }, "patientSearchPageTask");
       }
     };
+    this.handleSelectClick = (id: string) => wait(async () => {
+      props.getMedications(id);
+      let history = useHistory();
+      history.push(`/patient`);
+  }, "patientSearchPageTask");
     // "AwesomeDebouncePromise" makes a delay between
     // the end of input term and search request.
     //   wait(async () => {
@@ -94,7 +98,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
     // }, "patientPageTask");
   }
 
-  private handleSelcetClick: (id: string)
+  private handleSelectClick: (id: string)
     => void;
 
 
@@ -113,7 +117,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
         <td>{patient.firstName}</td>
         <td>{patient.lastName}</td>
         <td>
-          <button type="submit" onClick={() => this.handleSelcetClick(patient.id)} className="btn btn-info">Select</button>
+          <button type="submit" onClick={() => this.handleSelectClick(patient.id)} className="btn btn-info">Select</button>
           &nbsp;
         </td>
       </tr>
