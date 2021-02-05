@@ -10,7 +10,7 @@ export default class InteractionService extends ServiceBase {
     id: string = null
   ): Promise<Result<any>> {
     const result = await this.requestJson({
-      url: `/api/interaction/${id}`,
+      url: `/api/interaction/interaction/?id=${id}`,
       method: "GET",
     });
     return result;

@@ -11,6 +11,7 @@ import { wait } from "domain-wait";
 import Result from "@Core/Result";
 import { IMedicationConceptDTO } from "@Models/IMedicationConceptDTO";
 import { RouteComponentProps, withRouter } from "react-router";
+import { IMedicationInteractionPair } from "@Models/IMedicationInteractionPair";
 
 
 type Props = typeof patientStore.actionCreators &
@@ -19,7 +20,7 @@ type Props = typeof patientStore.actionCreators &
 
 interface IState {
 
-  isSelectModalOpen: boolean;
+  isInteractionsModalOpen: boolean;
 
 }
 //if you make this a FC you should be able to use Hooks to get the state you need and to navigate
@@ -41,14 +42,28 @@ class PatientPage extends React.Component<Props, IState> {
 
     this.state = {
 
-      isSelectModalOpen: false,
+      isInteractionsModalOpen: false,
 
     };
+    this.toggleInteractionsModal = () => {
+      if (this.props.interactions.length === 0) {
 
+        this.props.getInteractions(this.props.activePatient.id)
+
+      }
+      this.setState((prev) => ({
+        isInteractionsModalOpen: !prev.isInteractionsModalOpen,
+      }));
+    };
   }
 
-  private renderRows = (arr: IMedicationConceptDTO[]) =>
-    arr.map((med, index) => (
+  private toggleInteractionsModal: () =>
+    void
+    ;
+
+
+  private renderMeds = (arr: IMedicationConceptDTO[]) =>
+    arr.map((med) => (
       <tr key={med.resourceId}>
         <td>{med.resourceId}</td>
         <td>{med.text}</td>
@@ -57,15 +72,68 @@ class PatientPage extends React.Component<Props, IState> {
 
       </tr>
     ));
+  private renderInteractions = (arr: IMedicationInteractionPair[]) =>
+    arr.map((interaction) => (
+      <tbody>
+        <tr key={interaction.interactionId}>
+          <td>{interaction.medicationPair.item1.displayName}</td>
+        </tr>
+        <tr>
+          <td>
+            <small>
+              <a href="">
+                {" "}
+                order reference ID: {interaction.medicationPair.item1.resourceId}{" "}
+              </a>
+              Prescribed by: {interaction.medicationPair.item1.prescriber} on{" "}
+              {interaction.medicationPair.item1.timeOrdered}
+            </small>
+          </td>
+        </tr>
+        <tr>
+          <td>{interaction.medicationPair.item2.displayName}</td>
+        </tr>
+        <tr >
+          <td >
+            <small>
+              <a href="">
+                {" "}
+                order reference ID: {interaction.medicationPair.item2.resourceId}{" "}
+              </a>{" "}
+              Prescribed by: {interaction.medicationPair.item2.prescriber} on{" "}
+              {interaction.medicationPair.item2.timeOrdered}
+            </small>
+          </td>
+        </tr>
+      </tbody>
+    ));
+
 
   render() {
     return (
       <Container>
-        <Helmet title="{this.props.activePatient.lastName}${this.props.activePatient.firstName}">
+        <Helmet title="${this.props.activePatient.lastName},${this.props.activePatient.firstName}">
           {/* <title></title> */}
         </Helmet>
         <h2>{this.props.activePatient.lastName}</h2>
-        <h3>View Medications</h3>
+        <Container>
+          <Row>
+
+            <h3>View Medications</h3>
+            <Card body className="mt-4 mb-4">
+              <Row>
+                <div className="col-3 col-sm-2 col-md-2 col-lg-1">
+                  <button
+                    className="btn btn-success"
+                    onClick={(x) => this.toggleInteractionsModal()}
+                  >View Interactions
+              </button>
+                </div>
+
+              </Row>
+            </Card>
+          </Row>
+        </Container>
         <table className="table">
           <thead>
             <tr>
@@ -75,9 +143,43 @@ class PatientPage extends React.Component<Props, IState> {
               <th>Date Ordered</th>
             </tr>
           </thead>
-          <tbody>{this.renderRows(this.props.medications)}</tbody>
+          <tbody>
+            {this.renderMeds(this.props.medications)}
+          </tbody>
         </table>
         <h3>Order Medication</h3>
+
+        {/* Update modal */}
+        <Modal
+          show={this.state.isInteractionsModalOpen}
+          onHide={() => this.toggleInteractionsModal()}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Drug-Drug interactions :{" "}
+              {this.props.activePatient
+                ? `${this.props.activePatient.firstName} ${this.props.activePatient.lastName}`
+                : null}
+            </Modal.Title>
+          </Modal.Header>
+
+
+          <Modal.Body><table>
+            {this.renderInteractions(this.props.interactions)}
+          </table>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={(x) => this.toggleInteractionsModal()}
+            >
+              Close
+                  </Button>
+
+          </Modal.Footer>
+
+        </Modal>
       </Container>
     );
   }

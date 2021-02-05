@@ -60,6 +60,9 @@ const slice = createSlice({
     setMedications: (state, action: PayloadAction<IMedicationConceptDTO[]>) => {
       state.medications = action.payload;
     },
+    setActivePatient:(state, action: PayloadAction<IPatientModel>)=>{
+      state.activePatient = action.payload
+    }
   },
 });
 
@@ -68,6 +71,10 @@ export const { reducer } = slice;
 
 // Define action creators.
 export const actionCreators = {
+  setPatient:(patient: IPatientModel)=> (dispatch) => {
+    dispatch(slice.actions.setActivePatient(patient))
+    return patient
+  },
   searchAction: (limitTo: number, firstName?: string) => async (
     dispatch: Dispatch
   ) => {

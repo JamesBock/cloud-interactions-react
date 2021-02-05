@@ -77,8 +77,9 @@ class PatientSearchPage extends React.Component<Props, IState> {
         }, "patientSearchPageTask");
       }
     };
-    this.handleSelectClick = (id: string) => wait(async () => {
-      props.getMedications(id);
+    this.handleSelectClick = (patient: IPatientModel) => wait(async () => {
+      props.getMedications(patient.id);
+      props.setPatient(patient);
       props.history.push(`/patient`);
   }, "patientSearchPageTask");
     // "AwesomeDebouncePromise" makes a delay between
@@ -95,7 +96,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
     // }, "patientPageTask");
   }
 
-  private handleSelectClick: (id: string)
+  private handleSelectClick: (patient: IPatientModel)
     => void;
 
 
@@ -114,7 +115,7 @@ class PatientSearchPage extends React.Component<Props, IState> {
         <td>{patient.firstName}</td>
         <td>{patient.lastName}</td>
         <td>
-          <button type="submit" onClick={() => this.handleSelectClick(patient.id)} className="btn btn-info">Select</button>
+          <button type="submit" onClick={() => this.handleSelectClick(patient)} className="btn btn-info">Select</button>
           &nbsp;
         </td>
       </tr>
